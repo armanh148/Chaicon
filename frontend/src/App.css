@@ -1437,13 +1437,68 @@
     font-size: 10.5px;
   }
 
-  /* Product Grid */
+  /* Product Grid: 2 cards per row on mobile & tablets */
   .product-grid-layout {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   .card-photo-box {
-    height: 220px;
+    height: 165px;
+    padding: 12px;
+  }
+  .card-details-box {
+    padding: 12px 10px;
+  }
+  .badge-city-loc {
+    top: 8px;
+    left: 8px;
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+  .badge-verified-tag {
+    top: 8px;
+    right: 8px;
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+  .seller-brand-heading {
+    font-size: 10.5px;
+    margin-bottom: 3px;
+  }
+  .card-item-title {
+    font-size: 12.5px;
+    line-height: 1.35;
+    min-height: 34px;
+    margin-bottom: 8px;
+  }
+  .price-strip-box {
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .price-label {
+    font-size: 9px;
+  }
+  .pkr-main-rate {
+    font-size: 15px;
+  }
+  .usd-approx-rate {
+    font-size: 10.5px;
+  }
+  .meta-moq-info {
+    font-size: 10.5px;
+    margin-bottom: 10px;
+  }
+  .card-cta-group {
+    gap: 6px;
+  }
+  .btn-card-rfq,
+  .btn-card-whatsapp {
+    font-size: 11.5px;
+    padding: 8px 4px;
+    gap: 4px;
   }
 
   /* Footer */
