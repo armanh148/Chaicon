@@ -448,7 +448,7 @@ export default function App() {
 
           <div className="footer-bottom-bar">
             <div>© 2026 Chaicon.com — Engineered for Pakistani Commerce & Global Trade.</div>
-            <div>Verified B2B Gateway • ISO 9001 Certified Directory • 1600px Ultra Layout</div>
+            <div>Verified B2B Gateway • ISO 9001 Certified Directory • Full Width Fluid Layout</div>
           </div>
         </div>
       </footer>

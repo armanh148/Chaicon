@@ -65,9 +65,10 @@ a {
   transition: var(--transition);
 }
 
-/* 1600px Max-Width Container */
+/* Full Width Fluid Container */
 .container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 24px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 32px;
 }
