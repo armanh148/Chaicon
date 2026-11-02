@@ -18,7 +18,8 @@ export default function App() {
   }, []);
 
   const filteredProducts = products.filter(p => {
-    const matchesCity = (selectedCity === 'all') || (p.city && p.city.toLowerCase().includes(selectedCity.toLowerCase()));
+    const pCity = (p.city || '').toLowerCase();
+    const matchesCity = (selectedCity === 'all') || pCity.includes(selectedCity.toLowerCase());
     const matchesSearch = !searchQuery || 
       (p.alt && p.alt.toLowerCase().includes(searchQuery.toLowerCase())) || 
       (p.seller && p.seller.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -255,14 +256,26 @@ export default function App() {
             <div className="filter-ctrl-inner">
               <div className="city-pills-wrap">
                 <span className="filter-label"><i className="fa-solid fa-location-crosshairs" style={{ color: 'var(--brand-orange)' }}></i> Filter By City:</span>
-                {['all', 'Lahore', 'Karachi', 'Faisalabad', 'Gujranwala', 'Peshawar'].map(city => (
+                {[
+                  { id: 'all', label: 'All Pakistan' },
+                  { id: 'Lahore', label: 'Lahore (10)' },
+                  { id: 'Sialkot', label: 'Sialkot (8)' },
+                  { id: 'Karachi', label: 'Karachi (6)' },
+                  { id: 'Gujranwala', label: 'Gujranwala (3)' },
+                  { id: 'Islamabad', label: 'Islamabad (3)' },
+                  { id: 'Peshawar', label: 'Peshawar (1)' },
+                  { id: 'Gujrat', label: 'Gujrat (1)' },
+                  { id: 'Shikarpur', label: 'Shikarpur (1)' },
+                ].map(city => (
                   <button
-                    key={city}
+                    key={city.id}
                     type="button"
-                    className={`city-filter-btn ${selectedCity === city ? 'active' : ''}`}
-                    onClick={() => setSelectedCity(city)}
+                    className={`city-filter-btn ${selectedCity === city.id ? 'active' : ''}`}
+                    onClick={() => {
+                      setSelectedCity(city.id);
+                    }}
                   >
-                    {city === 'all' ? 'All Pakistan' : city}
+                    {city.label}
                   </button>
                 ))}
               </div>

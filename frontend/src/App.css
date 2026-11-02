@@ -1275,20 +1275,28 @@
     padding: 12px 14px;
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
   .city-pills-wrap {
     width: 100%;
     overflow-x: auto;
     flex-wrap: nowrap;
-    padding-bottom: 4px;
-    scrollbar-width: none;
+    padding-bottom: 6px;
+    scrollbar-width: auto;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    gap: 6px;
   }
-  .city-pills-wrap::-webkit-scrollbar { display: none; }
+  .filter-label {
+    flex-shrink: 0;
+    font-size: 12px;
+  }
   .city-filter-btn {
     flex-shrink: 0;
-    padding: 5px 12px;
+    padding: 6px 14px;
     font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
   }
 
   /* Section Heading */
