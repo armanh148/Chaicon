@@ -42,18 +42,41 @@ export default function App() {
       .catch(err => console.error('Error loading products:', err));
   }, []);
 
+  const sectorCategories = [
+    { id: 'all', label: 'All Sectors', icon: 'fa-th-large', keywords: [] },
+    { id: 'machinery', label: 'Industrial Machinery', icon: 'fa-cogs', keywords: ['laser', 'machine', 'printer', 'chiller', 'incubator', 'generator', 'burner', 'juicer', 'compressor', 'equipment', 'tester', 'sandblasting'] },
+    { id: 'textiles', label: 'Textiles & Garments', icon: 'fa-shirt', keywords: ['cotton', 'kurta', 'track suits', 'caps', 'hoodi', 'sweater', 'jackets', 'wallet', 'shirt', 'textile', 'leather', 'quilted', 'fabric'] },
+    { id: 'food', label: 'Food & Organic', icon: 'fa-bowl-food', keywords: ['pickle', 'honey', 'syrup', 'oil', 'salt', 'foods', 'tea'] },
+    { id: 'solar', label: 'Solar & Electrical', icon: 'fa-sun', keywords: ['solar', 'battery', 'energiko', 'lithium', 'bell', 'inverter'] },
+    { id: 'tools', label: 'Hardware & Tools', icon: 'fa-screwdriver-wrench', keywords: ['spanner', 'tools', 'torch', 'holder', 'rack', 'stainless', 'serrated', 'point'] },
+    { id: 'sports', label: 'Sports & Safety', icon: 'fa-shield-halved', keywords: ['guard', 'sleeve', 'safety', 'head guard', 'rash guard', 'training', 'running'] },
+    { id: 'printing', label: 'Packaging & Labels', icon: 'fa-print', keywords: ['dtf', 'sticker', 'label', 'printing', 'waste disposal', 'box'] },
+  ];
+
   const filteredProducts = products.filter(p => {
     const pCity = (p.city || '').toLowerCase();
+    const pText = ((p.alt || '') + ' ' + (p.seller || '')).toLowerCase();
+
+    // 1. City Filter
     const matchesCity = (selectedCity === 'all') || pCity.includes(selectedCity.toLowerCase());
-    const matchesSearch = !searchQuery || 
-      (p.alt && p.alt.toLowerCase().includes(searchQuery.toLowerCase())) || 
-      (p.seller && p.seller.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCity && matchesSearch;
+
+    // 2. Sector / Category Filter
+    let matchesCategory = true;
+    if (activeCategory !== 'all') {
+      const activeSec = sectorCategories.find(s => s.id === activeCategory);
+      if (activeSec && activeSec.keywords.length > 0) {
+        matchesCategory = activeSec.keywords.some(k => pText.includes(k));
+      }
+    }
+
+    // 3. Search Query Filter
+    const matchesSearch = !searchQuery || pText.includes(searchQuery.toLowerCase());
+
+    return matchesCity && matchesCategory && matchesSearch;
   });
 
-  const handleCategorySelect = (cat) => {
-    setActiveCategory(cat);
-    setSearchQuery(cat === 'all' ? '' : cat);
+  const handleCategorySelect = (catId) => {
+    setActiveCategory(catId);
   };
 
   const handleOpenModal = (title) => {
@@ -163,24 +186,28 @@ export default function App() {
         <div className="subnav-sectors">
           <div className="container">
             <div className="sectors-list">
-              {[
-                { id: 'all', label: 'All Sectors', icon: 'fa-th-large' },
-                { id: 'machinery', label: 'Industrial Machinery', icon: 'fa-cogs' },
-                { id: 'laser', label: 'Laser & Coding Printers', icon: 'fa-bolt' },
-                { id: 'cotton', label: 'Textiles & Garments', icon: 'fa-shirt' },
-                { id: 'solar', label: 'Solar & Clean Energy', icon: 'fa-sun' },
-                { id: 'torch', label: 'Hardware & Tools', icon: 'fa-wrench' },
-                { id: 'chiller', label: 'Milk Chillers & Dairy', icon: 'fa-snowflake' },
-              ].map(cat => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  className={`sector-pill ${activeCategory === cat.id ? 'active' : ''}`}
-                  onClick={() => handleCategorySelect(cat.id)}
-                >
-                  <i className={`fa ${cat.icon}`}></i> {cat.label}
-                </button>
-              ))}
+              {sectorCategories.map(cat => {
+                // Calculate count for each category
+                const catCount = cat.id === 'all'
+                  ? products.length
+                  : products.filter(p => {
+                      const pText = ((p.alt || '') + ' ' + (p.seller || '')).toLowerCase();
+                      return cat.keywords.some(k => pText.includes(k));
+                    }).length;
+
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`sector-pill ${activeCategory === cat.id ? 'active' : ''}`}
+                    onClick={() => handleCategorySelect(cat.id)}
+                  >
+                    <i className={`fa ${cat.icon}`}></i> 
+                    <span>{cat.label}</span>
+                    <span className="cat-pill-count">{catCount}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
