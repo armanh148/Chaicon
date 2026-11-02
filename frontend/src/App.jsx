@@ -254,31 +254,42 @@ export default function App() {
           {/* Interactive City Filter Bar */}
           <div className="filter-ctrl-bar">
             <div className="filter-ctrl-inner">
-              <div className="city-pills-wrap">
-                <span className="filter-label"><i className="fa-solid fa-location-crosshairs" style={{ color: 'var(--brand-orange)' }}></i> Filter By City:</span>
-                {[
-                  { id: 'all', label: 'All Pakistan' },
-                  { id: 'Lahore', label: 'Lahore (10)' },
-                  { id: 'Sialkot', label: 'Sialkot (8)' },
-                  { id: 'Karachi', label: 'Karachi (6)' },
-                  { id: 'Gujranwala', label: 'Gujranwala (3)' },
-                  { id: 'Islamabad', label: 'Islamabad (3)' },
-                  { id: 'Peshawar', label: 'Peshawar (1)' },
-                  { id: 'Gujrat', label: 'Gujrat (1)' },
-                  { id: 'Shikarpur', label: 'Shikarpur (1)' },
-                ].map(city => (
-                  <button
-                    key={city.id}
-                    type="button"
-                    className={`city-filter-btn ${selectedCity === city.id ? 'active' : ''}`}
-                    onClick={() => {
-                      setSelectedCity(city.id);
-                    }}
+              <div className="city-filter-dropdown-group">
+                <span className="filter-label">
+                  <i className="fa-solid fa-location-crosshairs" style={{ color: 'var(--brand-orange)' }}></i> 
+                  Filter By City:
+                </span>
+                
+                <div className="city-dropdown-box">
+                  <select
+                    className="city-select-input"
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
                   >
-                    {city.label}
+                    <option value="all">📍 All Pakistan (All Cities)</option>
+                    <option value="Lahore">Lahore (10 Products)</option>
+                    <option value="Sialkot">Sialkot (8 Products)</option>
+                    <option value="Karachi">Karachi (6 Products)</option>
+                    <option value="Gujranwala">Gujranwala (3 Products)</option>
+                    <option value="Islamabad">Islamabad (3 Products)</option>
+                    <option value="Peshawar">Peshawar (1 Product)</option>
+                    <option value="Gujrat">Gujrat (1 Product)</option>
+                    <option value="Shikarpur">Shikarpur (1 Product)</option>
+                  </select>
+                  <i className="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+                </div>
+
+                {selectedCity !== 'all' && (
+                  <button 
+                    type="button" 
+                    className="reset-city-btn" 
+                    onClick={() => setSelectedCity('all')}
+                  >
+                    <i className="fa-solid fa-rotate-left"></i> Reset City
                   </button>
-                ))}
+                )}
               </div>
+
               <div className="filter-meta-count">
                 Showing <strong>{filteredProducts.length}</strong> Verified Factory Listings
               </div>
