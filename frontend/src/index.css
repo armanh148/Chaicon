@@ -1,0 +1,73 @@
+:root {
+  --brand-magenta: #e61c83;
+  --brand-magenta-dark: #c01269;
+  --brand-magenta-glow: rgba(230, 28, 131, 0.22);
+  
+  --brand-orange: #f7931e;
+  --brand-orange-hover: #e5881c;
+  --brand-orange-light: #fff8ef;
+  --brand-orange-glow: rgba(247, 147, 30, 0.25);
+  
+  --brand-navy: #102a43;
+  --brand-navy-light: #1e3a5f;
+  --brand-dark: #090e17;
+  
+  --bg-page: #f6f8fb;
+  --surface-white: #ffffff;
+  --surface-subtle: #edf2f7;
+  
+  --text-dark: #0f172a;
+  --text-muted: #5a6a85;
+  --text-light: #94a3b8;
+  
+  --border-color: #e2e8f0;
+  --border-card: #e5e9f2;
+  
+  --whatsapp-green: #25d366;
+  --whatsapp-hover: #1eb855;
+  
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+  
+  --shadow-subtle: 0 2px 5px rgba(16, 42, 67, 0.04);
+  --shadow-card: 0 4px 14px rgba(16, 42, 67, 0.06);
+  --shadow-hover: 0 16px 32px rgba(16, 42, 67, 0.12), 0 4px 8px rgba(0,0,0,0.04);
+  --shadow-btn: 0 4px 12px var(--brand-orange-glow);
+  
+  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .brand-font {
+  font-family: 'Outfit', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+/* 1600px Max-Width Container */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

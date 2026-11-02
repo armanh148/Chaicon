@@ -1,0 +1,67 @@
+/* Minimal Font Awesome 5 subset used by the Chaicon clone */
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url('../fonts/fa-solid-900.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../fonts/fa-regular-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../fonts/fa-brands-400.woff2') format('woff2');
+}
+.fa,
+.fas,
+.far,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+}
+.fab {
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 400;
+}
+.fa-angle-double-up:before { content: "\f102"; }
+.fa-angle-right:before { content: "\f105"; }
+.fa-bars:before { content: "\f0c9"; }
+.fa-chevron-right:before { content: "\f054"; }
+.fa-cog:before { content: "\f013"; }
+.fa-envelope:before { content: "\f0e0"; }
+.fa-filter:before { content: "\f0b0"; }
+.fa-heart:before { content: "\f004"; }
+.fa-home:before { content: "\f015"; }
+.fa-industry:before { content: "\f275"; }
+.fa-map-marker-alt:before { content: "\f3c5"; }
+.fa-paper-plane:before { content: "\f1d8"; }
+.fa-phone:before { content: "\f095"; }
+.fa-power-off:before { content: "\f011"; }
+.fa-search:before { content: "\f002"; }
+.fa-shopping-bag:before { content: "\f290"; }
+.fa-store:before { content: "\f54e"; }
+.fa-times:before { content: "\f00d"; }
+.fa-user:before { content: "\f007"; }
+.fa-whatsapp:before { content: "\f232"; }
