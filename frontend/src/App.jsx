@@ -444,7 +444,7 @@ export default function App() {
                           onClick={() => handleOpenModal(`Quote for: ${p.alt}`)} 
                           className="btn-card-rfq"
                         >
-                          <i className="fa fa-envelope-open-text"></i> Get Quote
+                          <i className="fa fa-envelope-open-text"></i> <span>Quote</span>
                         </button>
                         <a 
                           href={`https://wa.me/923348577777?text=Assalam%20o%20Alaikum,%20I%20am%20interested%20in%20${encodeURIComponent(p.alt)}`} 
@@ -452,7 +452,7 @@ export default function App() {
                           rel="noreferrer" 
                           className="btn-card-whatsapp"
                         >
-                          <i className="fa-brands fa-whatsapp"></i> Chat Now
+                          <i className="fa-brands fa-whatsapp"></i> <span>Chat</span>
                         </a>
                       </div>
                     </div>
