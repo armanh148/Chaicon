@@ -7,7 +7,7 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('Request for Quotation');
+  const [modalTitle, setModalTitle] = useState('Request for Wholesale Quotation');
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function App() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    alert(`Shukriya ${formData.name || ''}! Aap ki wholesale inquiry supplier ko dispatch kardi gayi hai.`);
+    alert(`Shukriya ${formData.name || ''}! Aap ki inquiry verified seller tak phonch gayi hai.`);
     setModalOpen(false);
     setFormData({ name: '', phone: '', message: '' });
   };
@@ -49,15 +49,15 @@ export default function App() {
         <div className="container">
           <div className="top-bar-inner">
             <div className="top-left">
-              <span className="top-tag">Wholesale Mandi</span>
-              <span>🇵🇰 Pakistan's No. 1 B2B Sourcing Network for Commercial Machinery & Factories</span>
+              <span className="top-live-badge"><span className="pulse-dot"></span> LIVE WHOLESALE MANDI</span>
+              <span className="top-tagline">🇵🇰 Pakistan's No. 1 B2B Sourcing Platform for Industrial Machinery & Direct Factory Trade</span>
             </div>
             <div className="top-right">
-              <a href="tel:+923343331111"><i className="fa fa-phone"></i> +92-334-333-1111</a>
-              <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer">
-                <i className="fa-brands fa-whatsapp" style={{ color: '#25d366' }}></i> WhatsApp Support
+              <a href="tel:+923343331111" className="top-link"><i className="fa fa-phone"></i> +92-334-333-1111</a>
+              <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer" className="top-link whatsapp-top">
+                <i className="fa-brands fa-whatsapp"></i> WhatsApp Helpdesk
               </a>
-              <a href="#about"><i className="fa fa-shield-alt"></i> Buyer Protection</a>
+              <span className="currency-pill"><i className="fa-solid fa-money-bill-transfer"></i> PKR / USD</span>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function App() {
             {/* Logo */}
             <a href="/" className="brand-group">
               <div className="brand-icon-box">
-                <i className="fa-solid fa-industry"></i>
+                <i className="fa-solid fa-boxes-packing"></i>
               </div>
               <div className="brand-meta">
                 <div className="brand-logo-text brand-font">
@@ -82,21 +82,28 @@ export default function App() {
               </div>
             </a>
 
-            {/* Search Bar */}
+            {/* Smart Search Bar */}
             <div className="header-search">
               <div className="search-pill-box">
-                <select className="search-category-select" defaultValue="all">
-                  <option value="all">All Sectors</option>
-                  <option value="machinery">Machinery</option>
-                  <option value="suppliers">Suppliers</option>
-                </select>
+                <div className="search-select-wrapper">
+                  <select className="search-category-select" defaultValue="all">
+                    <option value="all">All Sectors</option>
+                    <option value="machinery">Machinery</option>
+                    <option value="suppliers">Suppliers</option>
+                  </select>
+                </div>
                 <input
                   type="text"
                   className="search-input"
-                  placeholder="Search industrial machinery, milk chillers, raw materials..."
+                  placeholder="Search industrial lasers, chillers, textile, packaging & tools..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
+                {searchQuery && (
+                  <button type="button" className="search-clear-btn" onClick={() => setSearchQuery('')}>
+                    <i className="fa fa-times"></i>
+                  </button>
+                )}
                 <button type="button" className="search-action-btn">
                   <i className="fa fa-search"></i>
                   <span>Search</span>
@@ -116,17 +123,17 @@ export default function App() {
               </button>
               <button 
                 type="button" 
-                onClick={() => handleOpenModal('Post Direct RFQ / Buying Requirement')} 
+                onClick={() => handleOpenModal('Post Direct RFQ / Bulk Requirement')} 
                 className="btn-rfq-quote"
               >
-                <i className="fa fa-paper-plane"></i>
-                <span>Get Quotes</span>
+                <i className="fa fa-bolt-lightning"></i>
+                <span>Get Instant Quotes</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Subnav Categories */}
+        {/* Subnav Categories Strip */}
         <div className="subnav-sectors">
           <div className="container">
             <div className="sectors-list">
@@ -134,8 +141,8 @@ export default function App() {
                 { id: 'all', label: 'All Sectors', icon: 'fa-th-large' },
                 { id: 'machinery', label: 'Industrial Machinery', icon: 'fa-cogs' },
                 { id: 'laser', label: 'Laser & Coding Printers', icon: 'fa-bolt' },
-                { id: 'cotton', label: 'Textiles & Fabrics', icon: 'fa-tshirt' },
-                { id: 'solar', label: 'Solar & Electrical', icon: 'fa-sun' },
+                { id: 'cotton', label: 'Textiles & Garments', icon: 'fa-shirt' },
+                { id: 'solar', label: 'Solar & Clean Energy', icon: 'fa-sun' },
                 { id: 'torch', label: 'Hardware & Tools', icon: 'fa-wrench' },
                 { id: 'chiller', label: 'Milk Chillers & Dairy', icon: 'fa-snowflake' },
               ].map(cat => (
@@ -157,41 +164,41 @@ export default function App() {
       <section className="hero-showcase">
         <div className="container">
           <div className="hero-layout">
-            <div>
+            <div className="hero-text-block">
               <div className="hero-pill-badge">
-                <i className="fa fa-certificate"></i> Verified Factory Sourcing Hub
+                <i className="fa-solid fa-award"></i> Pakistan's Verified B2B Trade Gateway
               </div>
               <h1 className="hero-title brand-font">
-                Direct B2B Sourcing from <span className="highlight-magenta">Pakistan's Top Factories</span>
+                Source Direct from <span className="highlight-magenta">Pakistan's Top Factories</span>
               </h1>
               <p className="hero-desc">
-                Connect directly with verified machinery manufacturers, wholesale suppliers, and milk chiller vendors in Lahore, Karachi, Faisalabad, Gujranwala, and Peshawar. Negotiate wholesale rates and secure verified trade.
+                Connect directly with certified industrial machinery manufacturers, bulk suppliers, and dairy equipment producers in Lahore, Karachi, Faisalabad, Gujranwala, and Peshawar. Get wholesale factory rates with verified buyer protection.
               </p>
+              
               <div className="hero-btn-row">
-                <a href="#browse-catalog" className="btn-rfq-quote" style={{ padding: '13px 28px', fontSize: '14.5px' }}>
-                  <i className="fa fa-boxes"></i> Explore 36+ Verified Products
+                <a href="#browse-catalog" className="btn-rfq-quote hero-main-cta">
+                  <i className="fa-solid fa-cart-flatbed-suitcase"></i> Explore 36+ Verified Products
                 </a>
                 <button
                   type="button"
                   onClick={() => handleOpenModal('Post Direct Buying Requirement')}
-                  className="btn-seller-link"
-                  style={{ padding: '13px 22px', fontSize: '14.5px' }}
+                  className="btn-seller-link hero-secondary-cta"
                 >
-                  <i className="fa fa-file-invoice"></i> Post Buying Requirement
+                  <i className="fa fa-file-invoice"></i> Post Direct RFQ Requirement
                 </button>
               </div>
 
               <div className="hero-stats-row">
                 <div className="stat-box">
-                  <h3 className="brand-font">5,400+</h3>
+                  <h3 className="brand-font">5,400<span>+</span></h3>
                   <p>Registered Manufacturers</p>
                 </div>
                 <div className="stat-box">
-                  <h3 className="brand-font">42,000+</h3>
+                  <h3 className="brand-font">42,000<span>+</span></h3>
                   <p>Industrial Listings</p>
                 </div>
                 <div className="stat-box">
-                  <h3 className="brand-font">100%</h3>
+                  <h3 className="brand-font">100<span>%</span></h3>
                   <p>Verified Factory Deals</p>
                 </div>
               </div>
@@ -202,19 +209,19 @@ export default function App() {
               <div className="value-box">
                 <div className="value-box-top-border border-orange"></div>
                 <div className="value-icon icon-bg-orange">
-                  <i className="fa fa-industry"></i>
+                  <i className="fa-solid fa-industry"></i>
                 </div>
                 <h4>Industrial Machinery</h4>
-                <p>From 20W CO2 Lasers to milk chillers and manufacturing production units.</p>
+                <p>Laser coding, production lines, milk chillers, and turnkey manufacturing plants.</p>
               </div>
 
               <div className="value-box">
                 <div className="value-box-top-border border-magenta"></div>
                 <div className="value-icon icon-bg-magenta">
-                  <i className="fa fa-shield-alt"></i>
+                  <i className="fa-solid fa-shield-halved"></i>
                 </div>
                 <h4>Verified Suppliers</h4>
-                <p>Direct communication with vetted factory owners across Pakistan.</p>
+                <p>Vetted factories with valid NTN, physical unit inspections, and manufacturer badges.</p>
               </div>
 
               <div className="value-box">
@@ -222,32 +229,32 @@ export default function App() {
                 <div className="value-icon icon-bg-green">
                   <i className="fa-brands fa-whatsapp"></i>
                 </div>
-                <h4>Instant WhatsApp Chat</h4>
-                <p>Direct chat links for instant quote delivery, samples and negotiation.</p>
+                <h4>Instant WhatsApp Quotes</h4>
+                <p>Direct chat links with seller sales desks for live quotes, specs, and video tours.</p>
               </div>
 
               <div className="value-box">
                 <div className="value-box-top-border border-navy"></div>
                 <div className="value-icon icon-bg-navy">
-                  <i className="fa fa-truck-fast"></i>
+                  <i className="fa-solid fa-truck-fast"></i>
                 </div>
-                <h4>Nationwide Logistics</h4>
-                <p>Full freight cargo delivery across Punjab, Sindh, KPK and Balochistan.</p>
+                <h4>Nationwide Freight</h4>
+                <p>Safe cargo logistics across Punjab, Sindh, KPK, Balochistan & export terminals.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRODUCT CATALOG SECTION (1600px Max-Width) */}
+      {/* PRODUCT CATALOG SECTION */}
       <main className="product-showcase-section" id="browse-catalog">
         <div className="container">
           
-          {/* Interactive City Filters Bar */}
+          {/* Interactive City Filter Bar */}
           <div className="filter-ctrl-bar">
             <div className="filter-ctrl-inner">
               <div className="city-pills-wrap">
-                <span className="filter-label"><i className="fa fa-map-marker-alt" style={{ color: 'var(--brand-orange)' }}></i> Filter By City:</span>
+                <span className="filter-label"><i className="fa-solid fa-location-crosshairs" style={{ color: 'var(--brand-orange)' }}></i> Filter By City:</span>
                 {['all', 'Lahore', 'Karachi', 'Faisalabad', 'Gujranwala', 'Peshawar'].map(city => (
                   <button
                     key={city}
@@ -260,24 +267,30 @@ export default function App() {
                 ))}
               </div>
               <div className="filter-meta-count">
-                Showing <strong>{filteredProducts.length}</strong> Wholesale Products
+                Showing <strong>{filteredProducts.length}</strong> Verified Factory Listings
               </div>
             </div>
           </div>
 
-          {/* Signature Orange Section Heading Strip */}
+          {/* Section Heading Banner */}
           <div className="section-banner-heading">
-            <h3><i className="fa fa-star"></i> Featured Factory Products</h3>
-            <span className="section-banner-badge">Real-Time Factory Prices</span>
+            <div className="section-banner-left">
+              <span className="banner-star-badge"><i className="fa fa-star"></i></span>
+              <h3>Featured Factory Inventory & Machinery</h3>
+            </div>
+            <span className="section-banner-badge">Real-Time Wholesale Rates</span>
           </div>
 
           {/* Dynamic Product Cards Grid */}
           <div className="product-grid-layout">
             {filteredProducts.length === 0 ? (
               <div className="empty-state-box">
-                <i className="fa fa-search" style={{ fontSize: '38px', color: 'var(--text-light)', marginBottom: '12px' }}></i>
-                <h4 style={{ color: 'var(--brand-navy)', fontSize: '18px' }}>No matching wholesale products found</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '6px' }}>Try clearing search keywords or selecting "All Pakistan".</p>
+                <i className="fa fa-search" style={{ fontSize: '42px', color: 'var(--text-light)', marginBottom: '14px' }}></i>
+                <h4 style={{ color: 'var(--brand-navy)', fontSize: '20px', fontWeight: 800 }}>No matching wholesale products found</h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '14.5px', marginTop: '6px' }}>Try clearing your search terms or selecting "All Pakistan".</p>
+                <button type="button" className="btn-clear-filters" onClick={() => { setSearchQuery(''); setSelectedCity('all'); setActiveCategory('all'); }}>
+                  Reset All Filters
+                </button>
               </div>
             ) : (
               filteredProducts.map((p, idx) => {
@@ -289,7 +302,7 @@ export default function App() {
                   <div className="catalog-card" key={p.id || idx}>
                     <div className="card-photo-box">
                       <span className="badge-city-loc"><i className="fa fa-map-marker-alt"></i> {p.city || 'Pakistan'}</span>
-                      <span className="badge-verified-tag"><i className="fa fa-check-circle"></i> Verified</span>
+                      <span className="badge-verified-tag"><i className="fa-solid fa-certificate"></i> Verified Factory</span>
                       <img 
                         src={localImg} 
                         alt={p.alt || 'Product'} 
@@ -299,18 +312,25 @@ export default function App() {
                     </div>
                     <div className="card-details-box">
                       <div className="seller-brand-heading">
-                        <i className="fa fa-building-circle-check"></i> {p.seller || 'Verified Factory'}
+                        <i className="fa-solid fa-circle-check"></i> {p.seller || 'Verified Factory'}
                       </div>
                       <h4 className="card-item-title" title={p.alt}>{p.alt}</h4>
                       
                       <div className="price-strip-box">
-                        <span className="pkr-main-rate">{p.pkr || 'Negotiable'}</span>
-                        {p.usd && <span className="usd-approx-rate">{p.usd}</span>}
+                        <div className="price-left">
+                          <span className="price-label">Wholesale Price</span>
+                          <span className="pkr-main-rate">{p.pkr || 'Negotiable'}</span>
+                        </div>
+                        {p.usd && (
+                          <div className="price-right">
+                            <span className="usd-approx-rate">{p.usd}</span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="meta-moq-info">
-                        <span className="moq-tag-box"><i className="fa fa-boxes"></i> MOQ: {p.moq || '1'} ({p.unit || 'Unit'})</span>
-                        <span className="stock-tag-box"><i className="fa fa-shield-alt"></i> In Stock</span>
+                        <span className="moq-tag-box"><i className="fa-solid fa-layer-group"></i> MOQ: <strong>{p.moq || '1'} {p.unit || 'Unit'}</strong></span>
+                        <span className="stock-tag-box"><i className="fa-solid fa-boxes-stacked"></i> In Stock</span>
                       </div>
 
                       <div className="card-cta-group">
@@ -319,7 +339,7 @@ export default function App() {
                           onClick={() => handleOpenModal(`Quote for: ${p.alt}`)} 
                           className="btn-card-rfq"
                         >
-                          <i className="fa fa-envelope"></i> Quote
+                          <i className="fa fa-envelope-open-text"></i> Get Quote
                         </button>
                         <a 
                           href={`https://wa.me/923348577777?text=Assalam%20o%20Alaikum,%20I%20am%20interested%20in%20${encodeURIComponent(p.alt)}`} 
@@ -327,7 +347,7 @@ export default function App() {
                           rel="noreferrer" 
                           className="btn-card-whatsapp"
                         >
-                          <i className="fa-brands fa-whatsapp"></i> Chat
+                          <i className="fa-brands fa-whatsapp"></i> Chat Now
                         </a>
                       </div>
                     </div>
@@ -346,11 +366,14 @@ export default function App() {
             <button className="inquiry-close-x" onClick={() => setModalOpen(false)}>
               <i className="fa fa-times"></i>
             </button>
+            <div className="modal-icon-badge">
+              <i className="fa-solid fa-file-contract"></i>
+            </div>
             <h3 className="brand-font">{modalTitle}</h3>
-            <p>Fill out the details below and verified factory suppliers will get in touch with you directly.</p>
+            <p>Directly communicate with registered Pakistani factories for bulk rates and OEM specs.</p>
             <form onSubmit={handleFormSubmit}>
               <div className="input-row">
-                <label>Your Name / Company Name</label>
+                <label>Company / Contact Person</label>
                 <input 
                   type="text" 
                   required 
@@ -374,12 +397,14 @@ export default function App() {
                 <textarea 
                   rows="3" 
                   required 
-                  placeholder="Describe unit quantity, delivery location, technical requirements..."
+                  placeholder="Describe units needed, delivery location, custom requirements..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 ></textarea>
               </div>
-              <button type="submit" className="btn-submit-rfq">Send Inquiry to Supplier</button>
+              <button type="submit" className="btn-submit-rfq">
+                <i className="fa-solid fa-paper-plane"></i> Send Inquiry to Factory
+              </button>
             </form>
           </div>
         </div>
@@ -395,36 +420,48 @@ export default function App() {
               <p>
                 Chaicon.com is Pakistan's premier B2B digital sourcing platform connecting local manufacturers, industrial plants, and commercial machine suppliers with wholesale buyers worldwide.
               </p>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', fontSize: '18px' }}>
+              <div className="footer-social-row">
+                <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer" className="social-circle whatsapp">
                   <i className="fa-brands fa-whatsapp"></i>
                 </a>
-                <a href="tel:+923343331111" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontSize: '15px' }}>
+                <a href="tel:+923343331111" className="social-circle phone">
                   <i className="fa fa-phone"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social-circle linkedin">
+                  <i className="fa-brands fa-linkedin-in"></i>
                 </a>
               </div>
             </div>
 
             <div>
-              <h4 className="footer-column-title">Direct Contact</h4>
+              <h4 className="footer-column-title">Direct Helpline</h4>
               <div className="footer-direct-contact">
                 <div className="contact-line">
                   <i className="fa fa-phone" style={{ color: 'var(--brand-orange)' }}></i>
-                  <a href="tel:+923343331111">+92-334-333-1111</a>
+                  <div>
+                    <span className="contact-small-label">UAN Helpline</span>
+                    <a href="tel:+923343331111">+92-334-333-1111</a>
+                  </div>
                 </div>
                 <div className="contact-line">
                   <i className="fa-brands fa-whatsapp" style={{ color: 'var(--whatsapp-green)' }}></i>
-                  <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer">+92-334-857-7777</a>
+                  <div>
+                    <span className="contact-small-label">WhatsApp Sourcing</span>
+                    <a href="https://api.whatsapp.com/send/?phone=923348577777" target="_blank" rel="noreferrer">+92-334-857-7777</a>
+                  </div>
                 </div>
                 <div className="contact-line">
                   <i className="fa fa-map-marker-alt" style={{ color: 'var(--brand-orange)' }}></i>
-                  <span>Lahore & Karachi, Pakistan</span>
+                  <div>
+                    <span className="contact-small-label">Hub Centers</span>
+                    <span>Lahore, Karachi, Gujranwala</span>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div>
-              <h4 className="footer-column-title">Sourcing Sectors</h4>
+              <h4 className="footer-column-title">Wholesale Sectors</h4>
               <ul className="footer-links-list">
                 <li><a href="#">Commercial & Industrial Machinery</a></li>
                 <li><a href="#">Milk Chillers & Dairy Equipment</a></li>
@@ -448,7 +485,7 @@ export default function App() {
 
           <div className="footer-bottom-bar">
             <div>© 2026 Chaicon.com — Engineered for Pakistani Commerce & Global Trade.</div>
-            <div>Verified B2B Gateway • ISO 9001 Certified Directory • Full Width Fluid Layout</div>
+            <div>Verified B2B Gateway • ISO 9001 Certified Directory • 100% Fluid Full-Width</div>
           </div>
         </div>
       </footer>
