@@ -1,9 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 export default function App() {
   const [products, setProducts] = useState([]);
   const [selectedCity, setSelectedCity] = useState('all');
+  const [cityDropdownOpen, setCityDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const cityList = [
+    { id: 'all', name: 'All Pakistan (All Cities)', count: 36, isAll: true },
+    { id: 'Lahore', name: 'Lahore', count: 10 },
+    { id: 'Sialkot', name: 'Sialkot', count: 8 },
+    { id: 'Karachi', name: 'Karachi', count: 6 },
+    { id: 'Gujranwala', name: 'Gujranwala', count: 3 },
+    { id: 'Islamabad', name: 'Islamabad', count: 3 },
+    { id: 'Peshawar', name: 'Peshawar', count: 1 },
+    { id: 'Gujrat', name: 'Gujrat', count: 1 },
+    { id: 'Shikarpur', name: 'Shikarpur', count: 1 },
+  ];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setCityDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -260,30 +285,59 @@ export default function App() {
                   Filter By City:
                 </span>
                 
-                <div className="city-dropdown-box">
-                  <select
-                    className="city-select-input"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
+                {/* Custom Elegant Dropdown */}
+                <div className="custom-city-dropdown-wrapper" ref={dropdownRef}>
+                  <button
+                    type="button"
+                    className={`custom-city-select-trigger ${cityDropdownOpen ? 'active' : ''}`}
+                    onClick={() => setCityDropdownOpen(!cityDropdownOpen)}
+                    aria-expanded={cityDropdownOpen}
                   >
-                    <option value="all">📍 All Pakistan (All Cities)</option>
-                    <option value="Lahore">Lahore (10 Products)</option>
-                    <option value="Sialkot">Sialkot (8 Products)</option>
-                    <option value="Karachi">Karachi (6 Products)</option>
-                    <option value="Gujranwala">Gujranwala (3 Products)</option>
-                    <option value="Islamabad">Islamabad (3 Products)</option>
-                    <option value="Peshawar">Peshawar (1 Product)</option>
-                    <option value="Gujrat">Gujrat (1 Product)</option>
-                    <option value="Shikarpur">Shikarpur (1 Product)</option>
-                  </select>
-                  <i className="fa-solid fa-chevron-down dropdown-arrow-icon"></i>
+                    <span className="current-selected-label">
+                      <span className="city-marker-icon">
+                        {selectedCity === 'all' ? '📍' : <i className="fa-solid fa-location-dot"></i>}
+                      </span>
+                      <span className="city-name-text">
+                        {cityList.find(c => c.id === selectedCity)?.name || 'All Pakistan'}
+                      </span>
+                    </span>
+                    <i className={`fa-solid fa-chevron-down dropdown-caret-icon ${cityDropdownOpen ? 'open' : ''}`}></i>
+                  </button>
+
+                  {cityDropdownOpen && (
+                    <div className="custom-city-options-popover">
+                      {cityList.map(city => (
+                        <div
+                          key={city.id}
+                          className={`custom-city-option-item ${selectedCity === city.id ? 'selected' : ''}`}
+                          onClick={() => {
+                            setSelectedCity(city.id);
+                            setCityDropdownOpen(false);
+                          }}
+                        >
+                          <div className="option-name-part">
+                            <span className="option-loc-icon">
+                              {city.isAll ? '📍' : <i className="fa-solid fa-location-dot"></i>}
+                            </span>
+                            <span className="option-text">{city.name}</span>
+                          </div>
+                          <span className="option-count-badge">
+                            {city.count} {city.count === 1 ? 'Product' : 'Products'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {selectedCity !== 'all' && (
                   <button 
                     type="button" 
                     className="reset-city-btn" 
-                    onClick={() => setSelectedCity('all')}
+                    onClick={() => {
+                      setSelectedCity('all');
+                      setCityDropdownOpen(false);
+                    }}
                   >
                     <i className="fa-solid fa-rotate-left"></i> Reset City
                   </button>
